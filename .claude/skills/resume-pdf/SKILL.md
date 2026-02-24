@@ -1,8 +1,6 @@
 ---
-name: resume-pdf
 description: Export a resume to PDF with custom styling. Use when asked to regenerate or export a resume PDF.
-allowed-tools: Bash, Read, Glob
-argument-hint: "[resume-directory]"
+user_invocable: true
 ---
 
 # Export Resume to PDF

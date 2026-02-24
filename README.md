@@ -17,7 +17,13 @@ Your private, AI-powered job search headquarters. Everything lives in Markdown f
 npm install -g @anthropic-ai/claude-code
 ```
 
-### 2. Set up your repo
+### 2. Install MCP Rubber Duck (recommended)
+
+[MCP Rubber Duck](https://github.com/nesquikm/mcp-rubber-duck) lets Claude Code query other LLMs as a fallback — used by `/apply` to fetch job listings from sites that block direct access (LinkedIn, Greenhouse, etc.) and to verify resumes and cover letters.
+
+Follow the install instructions in the repo, then add it to your Claude Code MCP config.
+
+### 3. Set up your repo
 
 **Option A — Clone this template:**
 ```bash
@@ -32,7 +38,7 @@ git init
 # Copy the template files into this directory
 ```
 
-### 3. Run the setup wizard
+### 4. Run the setup wizard
 
 ```bash
 claude
@@ -54,7 +60,7 @@ This will walk you through filling in your information step by step:
 
 Claude will populate all your profile files, create your first resume version, and configure the data sync points in `CLAUDE.md`.
 
-### 4. Start your search
+### 5. Start your search
 
 Once set up, just talk to Claude naturally:
 
@@ -70,7 +76,7 @@ Once set up, just talk to Claude naturally:
 profile/       # Your consolidated profile and positioning strategy
 profiles/      # Platform-specific content (LinkedIn, etc.) — copy-paste ready
 content/       # Published articles, comment targets, engagement tracking
-research/      # Job boards, target companies, salary data
+research/      # Job boards, target companies, salary data, search strategies
 applications/  # One file per application — status, notes, follow-ups
 resume/        # Resume versions and company-specific forks
 reading/       # Interview prep resources — articles, books, videos
@@ -88,10 +94,12 @@ todo.md        # Action items, deadlines, and quick wins
 
 | What you want to do | How to do it |
 |---|---|
+| Apply to a job | `/apply https://...` or `/apply [paste job description]` — full workflow |
 | Add a new application | Ask Claude — it creates `applications/{company}-{role}.md` and updates `todo.md` |
 | Tailor resume for a company | Ask Claude to fork your latest base resume for the company |
 | Export resume to PDF | `/resume-pdf resume/v1` (or any resume path) |
 | Research a company | Ask Claude — it can search the web and save findings |
+| Find hiring managers | Use X-ray searches from `research/x-ray-searches.md` |
 | Update your profile | Edit files in `profile/` and `profiles/` — Claude keeps them in sync |
 | Track a deadline | Add it to `todo.md` with date format `— **Mon DD**` |
 

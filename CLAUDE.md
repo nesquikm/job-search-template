@@ -17,12 +17,17 @@ Private job search project for **{YOUR_NAME}** ({YOUR_GITHUB_USERNAME}). Tracks 
 profile/       # Skills, experience, positioning strategy
 profiles/      # One file per platform (dev.to, LinkedIn, etc.) — copy-paste ready
 content/       # Published articles, Reddit posts, comment targets
-research/      # Job boards, target companies, salary data
-applications/  # Individual application tracking (one file per application)
+research/      # Job boards, target companies, salary data, search strategies
+applications/  # Application tracking files + cover letters (per-company set)
 resume/        # Resume versions and company-specific forks
 reading/       # Articles, videos, books to read/watch/review for prep
 todo.md        # Action items and quick wins
 ```
+
+### Proactive outreach
+
+- `research/x-ray-searches.md` — Google X-ray Boolean search strings for finding jobs and hiring managers on specific platforms
+- `research/outreach-workflow.md` — Step-by-step workflow for finding and messaging hiring managers, with LinkedIn templates and follow-up cadence
 
 ### Resume structure
 
@@ -30,6 +35,7 @@ todo.md        # Action items and quick wins
 - `resume/v{N}-{company}/` — company-specific forks (e.g., `v1-google/`, `v1-stripe/`)
 - Each directory contains `resume.md`, `resume-style.css`, and `resume.pdf`
 - When forking a resume for a company, create a new directory — never modify the base version
+- **Only update base versions** going forward — company forks are frozen snapshots of already-submitted applications. New forks branch from the updated base.
 
 ## Tools
 
@@ -39,7 +45,9 @@ todo.md        # Action items and quick wins
 
 ## Skills
 
-- Check `.claude/skills/` for available skills and **use them** when applicable (e.g., PDF export)
+Available slash commands (`.claude/skills/`):
+- `/apply <url or text>` — full application workflow: research company, analyze fit, tailor resume, write cover letter, create tracking file, generate PDFs
+- `/resume-pdf <resume/v*>` — export a resume directory to PDF via md-to-pdf
 
 ## Reminders
 
@@ -49,9 +57,10 @@ todo.md        # Action items and quick wins
 ## Guidelines
 
 - Keep company/role data up to date — job listings expire fast
-- When adding a new application, create `applications/{company}-{role}.md`
+- When adding a new application, use `/apply` — it handles research, resume tailoring, cover letter, tracking file, and PDFs. For manual tracking, create `applications/{company}-{role}.md`
 - All salary figures are annual USD unless noted otherwise
 - Don't push this repo to public — contains personal career strategy
+- When researching, use ducks (`ask_duck`) to fetch URLs that WebFetch can't access (LinkedIn, Reddit, etc.)
 - Update todo.md when completing action items or discovering new ones
 - When commenting on articles, be genuine — add value first, mention your projects only when naturally relevant
 
