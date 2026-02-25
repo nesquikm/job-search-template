@@ -21,7 +21,49 @@ npm install -g @anthropic-ai/claude-code
 
 [MCP Rubber Duck](https://github.com/nesquikm/mcp-rubber-duck) lets Claude Code query other LLMs as a fallback — used by `/apply` to fetch job listings from sites that block direct access (LinkedIn, Greenhouse, etc.) and to verify resumes and cover letters.
 
-Follow the install instructions in the repo, then add it to your Claude Code MCP config.
+With the MCP Bridge enabled, ducks can also use external MCP servers to fetch URLs, search the web, and browse pages that Claude can't access directly.
+
+Add this to your Claude Code MCP config (`~/.claude.json` → `mcpServers`):
+
+```json
+"rubber-duck": {
+  "type": "stdio",
+  "command": "npx",
+  "args": ["-y", "mcp-rubber-duck@latest"],
+  "env": {
+    "OPENAI_API_KEY": "your-openai-api-key",
+    "OPENAI_DEFAULT_MODEL": "gpt-4.1",
+    "DEFAULT_PROVIDER": "openai",
+
+    "MCP_BRIDGE_ENABLED": "true",
+    "MCP_APPROVAL_MODE": "trusted",
+
+    "MCP_SERVER_FETCH_TYPE": "stdio",
+    "MCP_SERVER_FETCH_COMMAND": "uvx",
+    "MCP_SERVER_FETCH_ARGS": "mcp-server-fetch,--ignore-robots-txt",
+    "MCP_SERVER_FETCH_ENABLED": "true",
+    "MCP_TRUSTED_TOOLS_FETCH": "*",
+
+    "MCP_SERVER_DDGSEARCH_TYPE": "stdio",
+    "MCP_SERVER_DDGSEARCH_COMMAND": "uvx",
+    "MCP_SERVER_DDGSEARCH_ARGS": "duckduckgo-mcp-server",
+    "MCP_SERVER_DDGSEARCH_ENABLED": "true",
+    "MCP_TRUSTED_TOOLS_DDGSEARCH": "*",
+
+    "MCP_SERVER_CHROME_TYPE": "stdio",
+    "MCP_SERVER_CHROME_COMMAND": "npx",
+    "MCP_SERVER_CHROME_ARGS": "chrome-devtools-mcp@latest",
+    "MCP_SERVER_CHROME_ENABLED": "true",
+    "MCP_TRUSTED_TOOLS_CHROME": "*"
+  }
+}
+```
+
+**Notes:**
+- Replace `your-openai-api-key` with your actual key. You can swap providers — see [MCP Rubber Duck docs](https://github.com/nesquikm/mcp-rubber-duck#configuration) for Gemini, Ollama, and others.
+- **fetch** — lets ducks retrieve URLs that Claude's WebFetch blocks (LinkedIn, Greenhouse, Reddit)
+- **ddgsearch** — gives ducks web search capabilities via DuckDuckGo
+- **chrome** — optional, for JS-heavy pages that need browser rendering (requires Chrome installed)
 
 ### 3. Set up your repo
 
