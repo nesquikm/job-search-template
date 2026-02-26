@@ -65,6 +65,28 @@ Add this to your Claude Code MCP config (`~/.claude.json` → `mcpServers`):
 - **ddgsearch** — gives ducks web search capabilities via DuckDuckGo
 - **chrome** — optional, for JS-heavy pages that need browser rendering (requires Chrome installed)
 
+<details>
+<summary><strong>Alternative: skip Rubber Duck, add MCP servers directly</strong></summary>
+
+If you don't need multi-LLM queries, you can add fetch and search servers straight to Claude Code. Add these to `~/.claude.json` → `mcpServers`:
+
+```json
+"fetch": {
+  "type": "stdio",
+  "command": "uvx",
+  "args": ["mcp-server-fetch", "--ignore-robots-txt"]
+},
+"ddgsearch": {
+  "type": "stdio",
+  "command": "uvx",
+  "args": ["duckduckgo-mcp-server"]
+}
+```
+
+This gives Claude direct access to URL fetching and web search. However, `/apply` will skip the duck verification steps (resume scoring and cover letter review by a second LLM).
+
+</details>
+
 ### 3. Set up your repo
 
 **Option A — Clone this template:**
