@@ -46,8 +46,15 @@ todo.md        # Action items and quick wins
 ## Skills
 
 Available slash commands (`.claude/skills/`):
+- `/scout <url or company>` — research job openings: fetch listings from a job board/company, filter for fit, check location/salary, summarize findings
 - `/apply <url or text>` — full application workflow: research company, analyze fit, tailor resume, write cover letter, create tracking file, generate PDFs
 - `/resume-pdf <resume/v*>` — export a resume directory to PDF via md-to-pdf
+
+## Agents
+
+Autonomous workers (`.claude/agents/`):
+- **scout** — background/parallel version of `/scout`. Auto-delegated when searching multiple sources at once. Read-only — returns a report, doesn't modify files.
+- **research-assistant** — general company/salary/market research. Returns structured findings.
 
 ## Reminders
 

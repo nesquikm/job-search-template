@@ -19,7 +19,7 @@ npm install -g @anthropic-ai/claude-code
 
 ### 2. Install MCP Rubber Duck (recommended)
 
-[MCP Rubber Duck](https://github.com/nesquikm/mcp-rubber-duck) lets Claude Code query other LLMs as a fallback — used by `/apply` to fetch job listings from sites that block direct access (LinkedIn, Greenhouse, etc.) and to verify resumes and cover letters.
+[MCP Rubber Duck](https://github.com/nesquikm/mcp-rubber-duck) lets Claude Code query other LLMs as a fallback — used by `/scout` and `/apply` to fetch job listings from sites that block direct access (LinkedIn, Greenhouse, etc.) and to verify resumes and cover letters.
 
 With the MCP Bridge enabled, ducks can also use external MCP servers to fetch URLs, search the web, and browse pages that Claude can't access directly.
 
@@ -83,7 +83,7 @@ If you don't need multi-LLM queries, you can add fetch and search servers straig
 }
 ```
 
-This gives Claude direct access to URL fetching and web search. However, `/apply` will skip the duck verification steps (resume scoring and cover letter review by a second LLM).
+This gives Claude direct access to URL fetching and web search. However, `/apply` will skip the duck verification steps (resume scoring and cover letter review by a second LLM), and `/scout` will lose its fallback fetch capability.
 
 </details>
 
@@ -128,8 +128,9 @@ Claude will populate all your profile files, create your first resume version, a
 
 Once set up, just talk to Claude naturally:
 
-- *"Research senior AI engineer roles at Anthropic"*
-- *"Add an application for Company X — Backend Engineer"*
+- *"Scout remote AI engineer roles on We Work Remotely"* (or `/scout https://weworkremotely.com`)
+- *"What's open at Sourcegraph?"* (or `/scout Sourcegraph`)
+- *"Apply to this role"* (or `/apply https://jobs.lever.co/company/role-id`)
 - *"Update my resume for this NLP-focused role"*
 - *"What's on my todo list for this week?"*
 - *"Export my resume to PDF"* (or `/resume-pdf resume/v1`)
@@ -158,14 +159,44 @@ todo.md        # Action items, deadlines, and quick wins
 
 | What you want to do | How to do it |
 |---|---|
+| Scout job openings | `/scout https://weworkremotely.com` or `/scout Sourcegraph` — search and filter |
+| Scout multiple boards at once | *"Search WWR, Remotive, and Himalayas for AI roles"* — Claude spawns parallel scout agents |
 | Apply to a job | `/apply https://...` or `/apply [paste job description]` — full workflow |
 | Add a new application | Ask Claude — it creates `applications/{company}-{role}.md` and updates `todo.md` |
 | Tailor resume for a company | Ask Claude to fork your latest base resume for the company |
 | Export resume to PDF | `/resume-pdf resume/v1` (or any resume path) |
-| Research a company | Ask Claude — it can search the web and save findings |
+| Research a company | `/scout CompanyName` — finds careers page, lists roles, assesses fit |
 | Find hiring managers | Use X-ray searches from `research/x-ray-searches.md` |
 | Update your profile | Edit files in `profile/` and `profiles/` — Claude keeps them in sync |
 | Track a deadline | Add it to `todo.md` with date format `— **Mon DD**` |
+
+## Skills & Agents
+
+This template includes two types of automation:
+
+**Skills** (`.claude/skills/`) — interactive workflows you invoke with slash commands:
+- `/scout <url or company>` — search a job board or company, filter and assess openings
+- `/apply <url or text>` — full application workflow (research → resume → cover letter → PDFs)
+- `/resume-pdf <path>` — export a resume to PDF
+- `/setup-profile` — initial profile setup wizard
+
+**Agents** (`.claude/agents/`) — autonomous workers Claude delegates to:
+- **scout** — background/parallel version of `/scout` (see design note below)
+- **research-assistant** — general-purpose research (company deep-dives, salary benchmarking, market analysis)
+
+### Why both a skill and an agent for scouting?
+
+The `/scout` skill and the `scout` agent share the same core logic (the agent injects the skill via `skills: [scout]`), but serve different use cases:
+
+| | `/scout` skill | `scout` agent |
+|---|---|---|
+| **Invocation** | Explicit: `/scout https://...` | Auto-delegated or explicit |
+| **Context** | Runs in your conversation | Runs in isolated context |
+| **Interaction** | Asks before updating `todo.md` | Read-only — returns a report |
+| **Parallelism** | One source at a time | Multiple agents in parallel |
+| **Best for** | Exploring one board/company interactively | *"Search 5 boards for AI roles while I write a cover letter"* |
+
+The agent is a lightweight read-only wrapper — it follows the skill's Steps 0–4 (fetch, filter, assess, present) and skips Step 5 (file updates). The main conversation reviews the agent's report and decides what to add to `todo.md`.
 
 ## Important
 
