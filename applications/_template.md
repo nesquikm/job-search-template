@@ -28,7 +28,12 @@
 
 ## Key Contacts
 
-<!-- Recruiter, hiring manager, referral -->
+| Role | Name | LinkedIn | Status |
+|------|------|----------|--------|
+| Hiring Manager | | | Not contacted |
+| Recruiter | | | |
+
+<!-- Status: Not contacted / Invite sent / Connected / Messaged / Replied -->
 
 ## Timeline
 

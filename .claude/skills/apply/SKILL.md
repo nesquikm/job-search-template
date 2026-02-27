@@ -1,5 +1,5 @@
 ---
-description: Full application workflow — research job listing, analyze fit, tailor resume, write cover letter, create tracking file, generate PDFs.
+description: Full application workflow — research job listing, analyze fit, tailor resume, write cover letter, create tracking file, find hiring manager, generate PDFs.
 user_invocable: true
 ---
 
@@ -232,6 +232,42 @@ Create `applications/{company}-{role}.md` using the structure from `applications
 - Key contacts from research
 - Timeline: today's date + "Application prepared"
 - Notes: research highlights, keyword matches, interview prep notes
+
+## Step 5b: Find Hiring Manager
+
+X-ray LinkedIn to identify the engineering decision-maker who likely owns this hire.
+
+**Run 1-2 WebSearch queries based on the role and company stage:**
+
+General engineering leadership:
+```
+site:linkedin.com/in ("Head of Engineering" OR "VP Engineering" OR "Director of Engineering" OR CTO OR "Engineering Manager") "{Company}"
+```
+
+For early-stage startups (Seed – Series A), also search:
+```
+site:linkedin.com/in (CTO OR "Co-founder" OR "Founder") "{Company}"
+```
+
+For AI/ML roles, also search:
+```
+site:linkedin.com/in ("Head of AI" OR "AI Lead" OR "ML Engineering Manager" OR "VP of AI" OR "Director of AI") "{Company}"
+```
+
+**Pick the best target** based on company stage:
+- Seed – Series A → CTO, Founder
+- Series B – C → Engineering Manager, Director of Engineering
+- Late stage / Enterprise → VP Engineering, Head of [Area]
+
+**Update the tracking file** — fill in the Key Contacts table with the best match (name + LinkedIn URL). If multiple strong candidates found, list the top 2.
+
+If no results found, note: "No hiring manager found via X-ray — try manual LinkedIn search"
+
+**Present findings to user:**
+> **Hiring manager found:** {Name} — {Title} at {Company}
+> LinkedIn: {URL}
+>
+> Consider warming up their profile (view + like a post) before reaching out in 1-2 days.
 
 ## Step 6: Update todo.md
 
