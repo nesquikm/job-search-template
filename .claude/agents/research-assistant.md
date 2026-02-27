@@ -26,6 +26,10 @@ Always structure your findings in markdown format ready to be saved to the appro
 - Salary data → `research/salary-data.md` format (by role type)
 - Job board findings → `research/job-boards.md` format (by category)
 
+## Fetching fallbacks
+
+When WebFetch fails or returns empty results, ask the main conversation to use `mcp__rubber-duck__ask_duck` to fetch URLs or perform DDG searches on your behalf. The research-assistant agent does not have direct MCP tool access — flag blocked URLs in your report so the main conversation can retry via ducks.
+
 ## Guidelines
 
 - Always include source URLs for any claims

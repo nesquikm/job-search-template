@@ -26,7 +26,7 @@ todo.md        # Action items and quick wins
 
 ### Proactive outreach
 
-- `research/x-ray-searches.md` — Google X-ray Boolean search strings for finding jobs and hiring managers on specific platforms
+- `research/x-ray-searches.md` — X-ray search strings (Google + DDG via duck) for finding jobs and hiring managers on specific platforms
 - `research/outreach-workflow.md` — Step-by-step workflow for finding and messaging hiring managers, with LinkedIn templates and follow-up cadence
 
 ### Resume structure

@@ -21,6 +21,10 @@ Follow the instructions from the `/scout` skill injected above, with these adjus
 
 When WebFetch fails (403, empty, JS-rendered), use `mcp__rubber-duck__ask_duck` to fetch URLs. If that also fails, try Greenhouse/Lever APIs for company career pages. Report what worked and what didn't.
 
+## DDG search via duck
+
+For proactive discovery (not just fetching a given URL), use `mcp__rubber-duck__ask_duck` with DDG-friendly search queries from `research/x-ray-searches.md`. This is useful when scanning broadly for roles across multiple platforms.
+
 ## Profile context
 
 Read `profile/summary.md` and `profile/strengths.md` at the start to understand fit criteria. Read `CLAUDE.md` Key Context for target roles, location, and salary expectations.

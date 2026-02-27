@@ -14,31 +14,11 @@ Don't just apply and wait. For high-priority roles, find the actual decision-mak
 
 ## Step 1: Find the Job
 
-Identify a relevant role through job boards, X-ray searches (see `research/x-ray-searches.md`), or company career pages.
+Identify a relevant role through job boards, X-ray searches (see `research/x-ray-searches.md` — Google or DDG via duck), or company career pages.
 
 ## Step 2: Identify the Hiring Manager
 
-Use Google X-ray to find the decision-maker on LinkedIn. Replace `"Company Name"` with the actual company.
-
-**General engineering leadership:**
-```
-site:linkedin.com/in ("Head of Engineering" OR "VP Engineering" OR "Director of Engineering" OR CTO OR "Engineering Manager") "Company Name"
-```
-
-**AI / ML leadership:**
-```
-site:linkedin.com/in ("Head of AI" OR "AI Lead" OR "ML Engineering Manager" OR "VP of AI") "Company Name"
-```
-
-**Mobile leadership:**
-```
-site:linkedin.com/in ("Head of Mobile" OR "Mobile Lead" OR "Mobile Engineering Manager") "Company Name"
-```
-
-**Early-stage startups:**
-```
-site:linkedin.com/in (CTO OR "Co-founder" OR "Founder & CTO") "Company Name"
-```
+Use Google X-ray to find the decision-maker on LinkedIn. See the "Finding Hiring Managers" section in `research/x-ray-searches.md` for search strings by role type (engineering leadership, AI/ML, mobile, startups).
 
 ### Who to target
 
@@ -193,7 +173,7 @@ Brief, light, graceful exit:
 
 | Activity | Time | Daily target |
 |---|---|---|
-| Find relevant roles (Google X-ray + boards) | 30 min | 5-10 roles |
+| Find relevant roles (X-ray searches + boards) | 30 min | 5-10 roles |
 | Identify hiring managers per role | 30 min | 1-2 per role |
 | Outreach for open roles | 30 min | 5-10 messages |
 | Networking outreach (no open role) | 20 min | 5-10 messages |
