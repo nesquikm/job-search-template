@@ -278,13 +278,15 @@ Add the application entry in `todo.md`:
 
 ## Step 7: Generate PDFs
 
+**Important:** Run each `md-to-pdf` call in a separate sequential command — do NOT chain with `&&` or run in parallel. Puppeteer/Chromium stalls when multiple instances launch concurrently.
+
 1. Resume PDF:
    ```
    npx md-to-pdf resume/v{N}-{company}/resume.md
    ```
    Verify `resume/v{N}-{company}/resume.pdf` exists. Report file size.
 
-2. Cover letter PDF:
+2. Cover letter PDF (separate command):
    ```
    npx md-to-pdf applications/{company}-cover-letter.md
    ```

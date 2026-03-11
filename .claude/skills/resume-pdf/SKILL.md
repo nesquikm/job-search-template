@@ -21,3 +21,7 @@ If no argument is given, ask which resume version to export.
    ```
 3. Verify the output file exists at `$ARGUMENTS/resume.pdf`
 4. Report the file size and confirm success
+
+## Important
+
+- **Run one PDF at a time.** Do NOT chain multiple `md-to-pdf` calls with `&&` or run them in parallel — Puppeteer/Chromium stalls when multiple instances launch concurrently. Generate each PDF in a separate sequential command.
