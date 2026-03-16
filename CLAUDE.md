@@ -68,6 +68,7 @@ Autonomous workers (`.claude/agents/`):
 - All salary figures are annual USD unless noted otherwise
 - Don't push this repo to public — contains personal career strategy
 - When researching, use ducks (`ask_duck`) to fetch URLs that WebFetch can't access (LinkedIn, Reddit, etc.)
+- **Chrome DevTools MCP** is available for direct browser interaction (navigating pages, reading DOM, clicking elements). Useful for sites that require JS rendering or login. Requires Chrome open with `--remote-debugging-port=9222`.
 - Update todo.md when completing action items or discovering new ones
 - When commenting on articles, be genuine — add value first, mention your projects only when naturally relevant
 

@@ -3,6 +3,11 @@
     "himalayas": {
       "type": "sse",
       "url": "https://mcp.himalayas.app/sse"
+    },
+    "chrome": {
+      "type": "stdio",
+      "command": "npx",
+      "args": ["chrome-devtools-mcp@latest"]
     }
   }
 }
