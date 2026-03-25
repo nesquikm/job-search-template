@@ -105,7 +105,7 @@ Read the user's profile to compare against job requirements:
 
 Modify `resume/v{N}-{company}/resume.md`:
 
-1. **YAML frontmatter:** Update `stylesheet` path to `resume/v{N}-{company}/resume-style.css`
+1. **YAML frontmatter (md-to-pdf only):** Update `stylesheet` path to `resume/v{N}-{company}/resume-style.css`. Skip this step for WeasyPrint resumes (no frontmatter).
 2. **Headline (H2):** Change to match the target role (e.g., "AI Data Engineer | LLM Extraction Pipelines & Content Discovery")
 3. **Timezone line:** Adjust "flexible for X overlap" to match the role's timezone
 4. **Links line:** Remove irrelevant links (e.g., pub.dev if not Flutter). Add language line if relevant
@@ -278,19 +278,36 @@ Add the application entry in `todo.md`:
 
 ## Step 7: Generate PDFs
 
-**Important:** Run each `md-to-pdf` call in a separate sequential command — do NOT chain with `&&` or run in parallel. Puppeteer/Chromium stalls when multiple instances launch concurrently.
+**Important:** Run each PDF generation in a separate sequential command — do NOT chain with `&&` or run in parallel.
+
+**Detect the PDF engine** by checking if `resume/v{N}-{company}/resume.md` starts with YAML frontmatter containing `pdf_options:`:
+
+**If WeasyPrint (no frontmatter):**
 
 1. Resume PDF:
    ```
-   npx md-to-pdf resume/v{N}-{company}/resume.md
+   /resume-pdf resume/v{N}-{company}
    ```
-   Verify `resume/v{N}-{company}/resume.pdf` exists. Report file size.
 
 2. Cover letter PDF (separate command):
    ```
    npx md-to-pdf applications/{company}-cover-letter.md
    ```
-   Verify `applications/{company}-cover-letter.pdf` exists. Report file size.
+   (Cover letters always use md-to-pdf since they have their own YAML frontmatter.)
+
+**If md-to-pdf (has frontmatter):**
+
+1. Resume PDF:
+   ```
+   npx md-to-pdf resume/v{N}-{company}/resume.md
+   ```
+
+2. Cover letter PDF (separate command):
+   ```
+   npx md-to-pdf applications/{company}-cover-letter.md
+   ```
+
+Verify both PDF files exist. Report file sizes.
 
 ## Step 8: Final Summary
 

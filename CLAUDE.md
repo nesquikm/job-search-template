@@ -48,7 +48,7 @@ todo.md        # Action items and quick wins
 Available slash commands (`.claude/skills/`):
 - `/scout <url or company>` — research job openings: fetch listings from a job board/company, filter for fit, check location/salary, summarize findings
 - `/apply <url or text>` — full application workflow: research company, analyze fit, tailor resume, write cover letter, create tracking file, generate PDFs
-- `/resume-pdf <resume/v*>` — export a resume directory to PDF via md-to-pdf
+- `/resume-pdf <resume/v*>` — export a resume directory to PDF (auto-detects WeasyPrint or md-to-pdf)
 
 ## Agents
 

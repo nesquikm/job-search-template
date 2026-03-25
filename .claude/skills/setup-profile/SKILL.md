@@ -109,9 +109,25 @@ Generate copy-paste-ready content:
 - Update `profiles/linkedin-projects.md` with actual project data
 - Verify `profiles/linkedin-experience.md` has recommended titles
 
-## Step 10: Final Setup
+## Step 10: PDF Engine Choice
 
-1. Complete the `resume/v1/resume.md` with all sections and proper YAML front matter for `md-to-pdf`
+Ask the user which PDF engine they prefer:
+
+> **How would you like to generate resume PDFs?**
+>
+> 1. **WeasyPrint** (recommended) — better ATS text extraction, smaller files, bullet markers preserved. Requires `brew install weasyprint` (or pip).
+> 2. **md-to-pdf** — Chrome/Puppeteer-based, uses npm. Simpler setup if you already have Node.js.
+
+**Based on their choice:**
+
+- **WeasyPrint:** Use `resume/v1-weasyprint/` as the base. The resume.md has no YAML frontmatter; the CSS includes `@page` rules for margins. Delete the `resume/v1/` directory (md-to-pdf starter) and rename `resume/v1-weasyprint/` to `resume/v1/`.
+- **md-to-pdf:** Use the existing `resume/v1/` as-is. Delete the `resume/v1-weasyprint/` directory.
+
+Update `CLAUDE.md` to note which engine is in use.
+
+## Step 11: Final Setup
+
+1. Complete the active `resume/v1/resume.md` with all sections (YAML front matter for md-to-pdf, or clean markdown for WeasyPrint)
 2. Update all `{PLACEHOLDER}` values in `CLAUDE.md` with real data
 3. Update `todo.md` with personalized action items:
    - Mark setup steps as complete

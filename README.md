@@ -155,6 +155,15 @@ todo.md        # Action items, deadlines, and quick wins
 - Each directory contains `resume.md`, `resume-style.css`, and `resume.pdf`
 - Never modify a base version when tailoring — always create a new fork
 
+### PDF engine
+
+The `/setup-profile` wizard asks which PDF engine you prefer:
+
+- **WeasyPrint** (recommended) — produces ATS-friendly PDFs with proper text extraction (bullet markers preserved, smaller files). Requires `brew install weasyprint`.
+- **md-to-pdf** — Chrome/Puppeteer-based, simpler setup if you already have Node.js. Install with `npx md-to-pdf`.
+
+The `/resume-pdf` skill auto-detects which engine to use based on your resume format.
+
 ## Day-to-Day Usage
 
 | What you want to do | How to do it |
