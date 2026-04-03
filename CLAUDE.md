@@ -24,6 +24,16 @@ reading/       # Articles, videos, books to read/watch/review for prep
 todo.md        # Action items and quick wins
 ```
 
+### Content structure
+
+- `my-articles.md` — single source of truth for all published articles
+- `article-{slug}.md` + `.jpg` — article drafts with cover images
+- `linkedin-post-{slug}.md` — LinkedIn post drafts (link strategy, posting tips, post text)
+- `linkedin-repost-{slug}.md` — LinkedIn reposts
+- `submission-{platform}.md` — product directory submissions
+- `reddit-post-{slug}.md`, `post-{platform}.md` — other platform posts
+- `comment-targets.md` — threads to comment on
+
 ### Proactive outreach
 
 - `research/x-ray-searches.md` — X-ray search strings (Google + DDG via duck) for finding jobs and hiring managers on specific platforms

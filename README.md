@@ -66,6 +66,21 @@ Add this to your Claude Code MCP config (`~/.claude.json` → `mcpServers`):
 - **chrome** — optional, for JS-heavy pages that need browser rendering (requires Chrome installed)
 
 <details>
+<summary><strong>Included: Himalayas MCP for direct job search</strong></summary>
+
+This template ships with [Himalayas](https://himalayas.app/) MCP pre-configured in `.mcp.json`. Claude Code will prompt you to approve the server on first use. Once approved, `/scout` and `/apply` can query Himalayas directly via `mcp__himalayas__search_jobs` and `mcp__himalayas__search_companies` instead of scraping the website.
+
+To auto-approve without prompts, add to `.claude/settings.local.json`:
+
+```json
+{
+  "enabledMcpjsonServers": ["himalayas"]
+}
+```
+
+</details>
+
+<details>
 <summary><strong>Alternative: skip Rubber Duck, add MCP servers directly</strong></summary>
 
 If you don't need multi-LLM queries, you can add fetch and search servers straight to Claude Code. Add these to `~/.claude.json` → `mcpServers`:

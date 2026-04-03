@@ -33,6 +33,7 @@ Classify `$ARGUMENTS`:
 2. If blocked (403, empty, JS-rendered): use `mcp__rubber-duck__ask_duck` with prompt: "Fetch this URL and list all job openings with title, company, salary, and location: {url}"
 3. If still empty: **WebSearch** for the board + relevant keywords (from the user's profile — see Step 2)
 4. If the board has known APIs, try those:
+   - Himalayas: use `mcp__himalayas__search_jobs` with relevant keywords (if available)
    - Greenhouse boards: `https://api.greenhouse.io/v1/boards/{company}/jobs?content=true`
    - Lever: `https://api.lever.co/v0/postings/{company}`
 5. **DDG search via duck**: use `mcp__rubber-duck__ask_duck` with a DDG-friendly search query to discover listings (see `research/x-ray-searches.md` for DDG queries per track)
@@ -43,7 +44,7 @@ If the board supports pagination and results look promising, fetch 2-3 pages.
 
 ## Step 1b: Company — Find and Fetch Careers Page
 
-1. **WebSearch** for "{Company} careers jobs remote engineering" (or use `mcp__rubber-duck__ask_duck` with DDG search as an alternative)
+1. **WebSearch** for "{Company} careers jobs remote engineering {current year}" (or use `mcp__rubber-duck__ask_duck` with DDG search as an alternative)
 2. Try common career page patterns:
    - `{domain}/careers`, `{domain}/jobs`, `careers.{domain}`
    - ATS boards: search for `greenhouse.io/{company}`, `jobs.lever.co/{company}`, `jobs.ashbyhq.com/{company}`
