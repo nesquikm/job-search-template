@@ -8,6 +8,16 @@
       "type": "stdio",
       "command": "npx",
       "args": ["chrome-devtools-mcp@latest"]
+    },
+    "fetch": {
+      "type": "stdio",
+      "command": "uvx",
+      "args": ["mcp-server-fetch", "--ignore-robots-txt"]
+    },
+    "ddgsearch": {
+      "type": "stdio",
+      "command": "uvx",
+      "args": ["duckduckgo-mcp-server"]
     }
   }
 }

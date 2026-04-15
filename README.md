@@ -17,50 +17,35 @@ Your private, AI-powered job search headquarters. Everything lives in Markdown f
 npm install -g @anthropic-ai/claude-code
 ```
 
-### 2. Install fetch and search MCP servers (required)
+### 2. Bundled MCP servers (`.mcp.json`)
 
-Claude Code's built-in `WebFetch` respects `robots.txt`, so it gets blocked by most job boards (Greenhouse, Lever, LinkedIn, Reddit, etc.). You need `mcp-server-fetch` with `--ignore-robots-txt` plus a web search tool — without these, `/scout` and `/apply` can't read listings from the majority of sources.
+This template ships with four MCP servers pre-configured in `.mcp.json`. Claude Code will prompt you to approve them on first use — no manual edits to `~/.claude.json` required.
 
-Add these to your Claude Code MCP config (`~/.claude.json` → `mcpServers`):
+| Server | Purpose |
+|---|---|
+| **fetch** | `mcp-server-fetch` with `--ignore-robots-txt` — retrieves URLs that Claude's built-in `WebFetch` refuses. **Required** — most job boards (Greenhouse, Lever, LinkedIn, Reddit) block the default bot. |
+| **ddgsearch** | `duckduckgo-mcp-server` — web search via DuckDuckGo, no API key needed. Used for X-ray searches, company research, hiring-manager lookups. |
+| **himalayas** | [Himalayas](https://himalayas.app/) remote job board. `/scout` and `/apply` query it directly via `mcp__himalayas__search_jobs` / `search_companies` instead of scraping the website. |
+| **chrome** | `chrome-devtools-mcp` — browser control for JS-heavy careers portals that don't render without JavaScript. Requires Chrome installed. |
 
-```json
-"fetch": {
-  "type": "stdio",
-  "command": "uvx",
-  "args": ["mcp-server-fetch", "--ignore-robots-txt"]
-},
-"ddgsearch": {
-  "type": "stdio",
-  "command": "uvx",
-  "args": ["duckduckgo-mcp-server"]
-}
-```
+**Prerequisites:**
+- `uvx` (from [`uv`](https://github.com/astral-sh/uv)) — for `fetch` and `ddgsearch`
+- `npx` / Node — for `chrome`
+- Chrome — for the `chrome` server
 
-**Notes:**
-- **fetch** — retrieves URLs that Claude's built-in `WebFetch` refuses (the `--ignore-robots-txt` flag is the critical bit)
-- **ddgsearch** — web search via DuckDuckGo (no API key required)
-- For JS-heavy pages (some careers portals), also install `chrome-devtools-mcp@latest` as an additional MCP server, or reach it via Rubber Duck below
-
-<details>
-<summary><strong>Included: Himalayas MCP for direct job search</strong></summary>
-
-This template ships with [Himalayas](https://himalayas.app/) MCP pre-configured in `.mcp.json`. Claude Code will prompt you to approve the server on first use. Once approved, `/scout` and `/apply` can query Himalayas directly via `mcp__himalayas__search_jobs` and `mcp__himalayas__search_companies` instead of scraping the website.
-
-To auto-approve without prompts, add to `.claude/settings.local.json`:
+To skip the approval prompts, add this to `.claude/settings.local.json`:
 
 ```json
 {
-  "enabledMcpjsonServers": ["himalayas"]
+  "enabledMcpjsonServers": ["fetch", "ddgsearch", "himalayas", "chrome"]
 }
 ```
-
-</details>
 
 ### 3. Install MCP Rubber Duck (recommended, optional)
 
 [MCP Rubber Duck](https://github.com/nesquikm/mcp-rubber-duck) lets Claude Code query other LLMs as a second opinion — used by `/apply` to verify resumes and cover letters, and by `/scout` as a fallback when a page needs a different model to parse. With the MCP Bridge enabled, ducks can also reach external MCP servers themselves (useful for delegating long-running fetches or browser sessions).
 
-Add this alongside the `fetch` and `ddgsearch` entries in `~/.claude.json` → `mcpServers`:
+Add this to `~/.claude.json` → `mcpServers` (user-level, not the repo's `.mcp.json`, since it contains your API keys):
 
 ```json
 "rubber-duck": {
@@ -98,7 +83,7 @@ Add this alongside the `fetch` and `ddgsearch` entries in `~/.claude.json` → `
 
 **Notes:**
 - Replace `your-openai-api-key` with your actual key. Swap providers — see [MCP Rubber Duck docs](https://github.com/nesquikm/mcp-rubber-duck#configuration) for Gemini, Ollama, and others.
-- The bridged `fetch` / `ddgsearch` / `chrome` entries are for the duck's own use. Claude Code still uses the direct `fetch` / `ddgsearch` servers from step 2.
+- The bridged `fetch` / `ddgsearch` / `chrome` entries inside the duck's env are for the duck's own use (so another LLM can browse). Claude Code itself uses the `fetch` / `ddgsearch` / `chrome` servers from the repo's `.mcp.json` (step 2).
 - Without Rubber Duck, `/apply` skips the second-LLM verification pass but otherwise works fine.
 
 ### 4. Set up your repo
